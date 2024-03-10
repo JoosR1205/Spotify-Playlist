@@ -18,3 +18,33 @@ Clona este repositorio y navega al directorio clonado. Instala las dependencias 
 
 ```bash
 pip install -r requirements.txt
+```
+
+## Configuración
+
+1. Crea una aplicación en Dashboard de Desarrolladores de Spotify para obtener tu SPOTIFY_CLIENT_ID y SPOTIFY_CLIENT_SECRET.
+
+2.Configura las siguientes variables de entorno en tu sistema:
+  -SPOTIFY_CLIENT_ID: El ID de cliente proporcionado por Spotify.
+  
+  -SPOTIFY_CLIENT_SECRET: El secreto de cliente proporcionado por Spotify.
+  
+  -FLASK_SECRET_KEY: Una clave secreta para tu aplicación Flask.
+  
+  -SPOTIPY_REDIRECT_URI: La URI de redirección configurada en tu aplicación de Spotify.
+
+  ## Uso
+
+Para iniciar la aplicación Flask:
+
+```bash
+python app.py
+```
+
+Para ejecutar el script de Playlist Adder:
+
+```bash
+python Playlist_Adder.py
+```
+
+Sigue las instrucciones en la consola para autenticarte y comenzar a crear playlists en Spotify.
