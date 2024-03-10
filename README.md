@@ -1,4 +1,4 @@
-# Spotify Playlist Automation
+# Playlists de Spotify por Género
 
 Este proyecto permite a los usuarios autenticarse con Spotify, interactuar con la API de Spotify para obtener sus canciones favoritas, organizar estas canciones por género y crear playlists en Spotify basadas en esos géneros.
 
