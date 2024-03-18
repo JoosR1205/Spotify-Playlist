@@ -1,61 +1,66 @@
-# Playlists de Spotify por Género
+# Spotify Playlist Automation
 
-Este proyecto permite a los usuarios autenticarse con Spotify, interactuar con la API de Spotify para obtener sus canciones favoritas, organizar estas canciones por género y crear playlists en Spotify basadas en esos géneros.
+Este proyecto permite a los usuarios interactuar con la API de Spotify para obtener sus canciones favoritas y organizarlas en playlists personalizadas por género o crear una playlist con lanzamientos recientes de sus artistas favoritos.
 
 ## Características
 
-- Autenticación de usuario con Spotify a través de OAuth.
-- Organización de canciones gustadas por género.
-- Creación automática de playlists basadas en géneros seleccionados.
+- Autenticación con Spotify utilizando OAuth 2.0.
+- Recuperación de canciones gustadas y top artistas del usuario.
+- Organización de canciones gustadas por género y fecha de lanzamiento.
+- Creación automática de playlists basadas en géneros seleccionados y nuevos lanzamientos.
 
 ## Pre-requisitos
 
-Antes de comenzar, asegúrate de tener Python 3.6 o superior instalado en tu sistema. También necesitarás una cuenta de desarrollador de Spotify para obtener tus credenciales de cliente.
+- Python 3.6 o superior.
+- Cuenta de desarrollador de Spotify y aplicación registrada.
+- `pip` para la instalación de paquetes.
 
 ## Instalación
 
-Clona este repositorio y navega al directorio clonado. Instala las dependencias usando pip:
+1. Clona este repositorio.
+2. Navega al directorio clonado y ejecuta el comando para instalar las dependencias:
 
-```bash
-pip install -r requirements.txt
-```
+    ```bash
+    pip install -r requirements.txt
+    ```
 
 ## Configuración
 
-1. Crea una aplicación en Dashboard de Desarrolladores de Spotify para obtener tu SPOTIFY_CLIENT_ID y SPOTIFY_CLIENT_SECRET.
+1. Crea un archivo `.env` en el directorio principal del proyecto con las siguientes variables:
 
-2.Configura las siguientes variables de entorno en tu sistema:
-  -SPOTIFY_CLIENT_ID: El ID de cliente proporcionado por Spotify.
-  
-  -SPOTIFY_CLIENT_SECRET: El secreto de cliente proporcionado por Spotify.
-  
-  -FLASK_SECRET_KEY: Una clave secreta para tu aplicación Flask.
-  
-  -SPOTIPY_REDIRECT_URI: La URI de redirección configurada en tu aplicación de Spotify.
+    ```plaintext
+    SPOTIFY_CLIENT_ID='tu_spotify_client_id'
+    SPOTIFY_CLIENT_SECRET='tu_spotify_client_secret'
+    FLASK_SECRET_KEY='una_clave_secreta_aleatoria_para_flask'
+    SPOTIPY_REDIRECT_URI='tu_spotify_redirect_uri'
+    ```
 
-  ## Uso
+2. Configura las URI de redirección en el [Dashboard de Desarrolladores de Spotify](https://developer.spotify.com/dashboard/applications).
 
-Para iniciar la aplicación Flask:
+## Uso
 
-```bash
-python app.py
-```
+1. Inicia la aplicación Flask ejecutando:
 
-Para ejecutar el script de Playlist Adder:
+    ```bash
+    python app.py
+    ```
 
-```bash
-python Playlist_Adder.py
-```
+    Esto abrirá el servidor web Flask y manejará el proceso de autenticación de OAuth con Spotify.
 
+2. Navega a `http://localhost:5000/` en tu navegador para autenticarte con Spotify y comenzar a utilizar la aplicación.
 
-# Explicación de Scripts Spotify
+## Explicación de los Scripts
 
-## app.py
+### `app.py`
 
-Este script es una aplicación web Flask diseñada para interactuar con la API de Spotify. Autentica usuarios utilizando `SpotifyOAuth` y maneja rutas para guiarlos a través del proceso de autenticación. Posteriormente, permite realizar acciones específicas en Spotify, como guardar playlists de descubrimiento. Adicionalmente, ejecuta `Playlist_Adder.py` en un hilo separado al inicio de la aplicación, mostrando una integración entre ambos scripts.
+Una aplicación Flask que sirve como punto de entrada para la autenticación de usuarios y la interacción con la API de Spotify.
 
-## Playlist_Adder.py
+### `Playlist_Adder.py`
 
-`Playlist_Adder.py` utiliza `spotipy` y `prefect` para autenticar usuarios de Spotify, recuperar sus canciones favoritas, organizarlas por género, y finalmente crear playlists basadas en esos géneros. A través de varias tareas decoradas con `@task`, realiza la autenticación, obtención de canciones, clasificación por género, y creación de playlists, coordinando todo el proceso en un flujo principal con `@flow`. Es un ejemplo claro de cómo automatizar la organización y creación de playlists personalizadas en Spotify.
+El script principal que utiliza Prefect para orquestar flujos de trabajo y gestionar la creación de playlists en base a las tareas definidas en `tareas.py`.
+
+### `tareas.py`
+
+Contiene todas las tareas decoradas con `@task` que realizan la lógica necesaria para interactuar con la API de Spotify, como la autenticación de usuarios, la recuperación de canciones likeadas, la organización de canciones por género y fecha de lanzamiento, y la creación de playlists.
 
 
